@@ -17,6 +17,7 @@ struct EventForm: View {
     var onSave: (Event) -> Void
     
     @State var event: Event
+    @Environment(\.presentationMode) var presentationMode
     
     init(editEvent: Event?, onSave: @escaping (Event) -> Void) {
         if let event = editEvent {
@@ -44,14 +45,18 @@ struct EventForm: View {
                     ColorPicker("Text Color", selection: $event.textColor)
                     DatePicker("Event Date", selection: $event.date)
                 }
-                Section {
-                    Button("Save") {
-                        onSave(event)
-                    }
-                    .disabled(validate() == false)
-                }
             }
             .navigationTitle(operation == .addNew ? "Add Event" : "Edit \(event.title)")
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Save") {
+                        onSave(event)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .disabled(validate() == false)
+                    .buttonStyle(.borderedProminent)
+                }
+            }
         }
     }
 }

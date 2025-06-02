@@ -17,7 +17,7 @@ struct EventsView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(events) { event in
+                ForEach(events.sorted()) { event in
                     NavigationLink(value: event) {
                         EventRowView(event: event)
                     }
