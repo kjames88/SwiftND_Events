@@ -17,8 +17,14 @@ struct EventsView: View {
                     EventRowView(event: event)
                 }
             }
-            .navigationDestination(for: Event.self) {event in
-                EventForm(editEvent: event, onSave: {updatedEvent in
+            //NavigationLink("Add Event") {
+            //    EventForm(editEvent: nil, onSave: { newEvent in
+            //        events.append(newEvent)
+            //    })
+            //}
+            .buttonStyle(.borderedProminent)
+            .navigationDestination(for: Event.self) { event in
+                EventForm(editEvent: event, onSave: { updatedEvent in
                     if let index = self.events.firstIndex(where: {$0.id == updatedEvent.id}) {
                         print("index \(index): \(updatedEvent)")
                         self.events[index] = updatedEvent
@@ -26,6 +32,19 @@ struct EventsView: View {
                         print("no index found \(updatedEvent.id)")
                     }
                 })
+            }
+            .navigationTitle("Events")
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink(destination:
+                        EventForm(editEvent: nil, onSave: { newEvent in
+                            events.append(newEvent)
+                    })) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                    }
+                }
             }
         }
     }

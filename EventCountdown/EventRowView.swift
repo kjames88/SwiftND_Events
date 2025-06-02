@@ -21,7 +21,7 @@ struct EventRowView: View {
     // Real time relative time field update
     // https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-a-timer-with-swiftui
     
-    let timer = Timer.publish(every: 60, on: .main, in: .common)
+    let timer = Timer.publish(every: 1, on: .main, in: .common)
         .autoconnect()
     
     var body: some View {

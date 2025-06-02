@@ -40,6 +40,7 @@ struct EventForm: View {
                 Section {
                     TextField("Title", text: $event.title)
                         .foregroundStyle(event.textColor)
+                        .disableAutocorrection(true)
                     ColorPicker("Text Color", selection: $event.textColor)
                     DatePicker("Event Date", selection: $event.date)
                 }
