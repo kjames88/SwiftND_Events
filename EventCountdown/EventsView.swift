@@ -11,7 +11,14 @@ struct EventsView: View {
     @State var events: [Event]
     
     private func deleteEvent(offsets: IndexSet) {
-        events.remove(atOffsets: offsets)
+        // Offsets is in sorted order:  find the id in the main array
+        if let idx = offsets.first {
+            let s = events.sorted()
+            let targetId = s[idx].id
+            if let targetIdx = events.firstIndex(where: {$0.id == targetId}) {
+                events.remove(at: targetIdx)
+            }
+        }
     }
     
     var body: some View {
