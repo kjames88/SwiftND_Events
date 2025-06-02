@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventRowView: View {
+struct EventRow: View {
     var event: Event
     @State private var relativeTime: String
     
@@ -21,7 +21,7 @@ struct EventRowView: View {
     // Real time relative time field update
     // https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-a-timer-with-swiftui
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common)
+    private let timer = Timer.publish(every: 1, on: .main, in: .common)
         .autoconnect()
     
     var body: some View {
@@ -39,5 +39,5 @@ struct EventRowView: View {
 }
 
 #Preview {
-    EventRowView(event: Event (title: "Test Event", date: Date(timeIntervalSinceNow: 120), textColor: .orange))
+    EventRow(event: Event (title: "Test Event", date: Date(timeIntervalSinceNow: 120), textColor: .orange))
 }

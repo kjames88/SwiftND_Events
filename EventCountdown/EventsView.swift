@@ -19,7 +19,7 @@ struct EventsView: View {
             List {
                 ForEach(events.sorted()) { event in
                     NavigationLink(value: event) {
-                        EventRowView(event: event)
+                        EventRow(event: event)
                     }
                 }
                 .onDelete(perform: deleteEvent)
