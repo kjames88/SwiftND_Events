@@ -10,18 +10,20 @@ import SwiftUI
 struct EventsView: View {
     @State var events: [Event]
     
+    private func deleteEvent(offsets: IndexSet) {
+        events.remove(atOffsets: offsets)
+    }
+    
     var body: some View {
         NavigationStack {
-            List(events) {event in
-                NavigationLink(value: event) {
-                    EventRowView(event: event)
+            List {
+                ForEach(events) { event in
+                    NavigationLink(value: event) {
+                        EventRowView(event: event)
+                    }
                 }
+                .onDelete(perform: deleteEvent)
             }
-            //NavigationLink("Add Event") {
-            //    EventForm(editEvent: nil, onSave: { newEvent in
-            //        events.append(newEvent)
-            //    })
-            //}
             .buttonStyle(.borderedProminent)
             .navigationDestination(for: Event.self) { event in
                 EventForm(editEvent: event, onSave: { updatedEvent in

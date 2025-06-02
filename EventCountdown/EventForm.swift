@@ -51,7 +51,7 @@ struct EventForm: View {
                     .disabled(validate() == false)
                 }
             }
-            .navigationTitle(operation == .addNew ? "Add Event" : "Edit Event")
+            .navigationTitle(operation == .addNew ? "Add Event" : "Edit \(event.title)")
         }
     }
 }
